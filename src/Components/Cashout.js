@@ -21,15 +21,17 @@ export const Cashout = (props) => {
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
-            if (user) {
+           
+           
+            if(user){
                 db.collection('SignedUpUsersData').doc(user.uid).onSnapshot(snapshot => {
                     setName(snapshot.data().Name);
                     setEmail(snapshot.data().Email);
                 })
             }
-            else {
-                history.push('/login')
-            }
+             else {
+                 history.push('/login')
+             }
         })
     })
 
@@ -52,7 +54,7 @@ export const Cashout = (props) => {
                     dispatch({ type: 'EMPTY' })
                     setSuccessMsg('Your order has been placed successfully. Thanks for visiting us. You will be redirected to home page after 5 seconds');
                     setTimeout(() => {
-                        history.push('/')
+                        history.push('/login')
                     }, 5000)
                 }).catch(err => setError(err.message))
             }

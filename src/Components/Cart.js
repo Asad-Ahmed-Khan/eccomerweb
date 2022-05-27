@@ -8,6 +8,7 @@ import { iosTrashOutline } from 'react-icons-kit/ionicons/iosTrashOutline'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { auth } from '../Config/config'
+import { Login } from '../Components/Login';
 
 export const Cart = ({ user }) => {
     console.log('lskhdfoksdfjidshf')
@@ -16,18 +17,27 @@ export const Cart = ({ user }) => {
 
     const history = useHistory();
 
+    // useEffect(() => {
+    //     auth.onAuthStateChanged(user => {
+    //         if (user.length !== 0) {
+    //             history.push('/login');
+    //         }
+    //     })
+    // })
     useEffect(() => {
-        auth.onAuthStateChanged(user => {
-            if (!user) {
-                history.push('/login');
-            }
-        })
-    })
+        auth.onAuthStateChanged(user =>   {
+        if(user.length !== 0 ){
+    alert('login your account')
+}
+})
+    }) 
+
 console.log('cart data', shoppingCart)
     return (
         <>
             <Navbar user={user} />
             <>
+
                 {shoppingCart.length !== 0 && <h1>Cart</h1>}
                 <div className='cart-container'>
                     {
@@ -69,7 +79,7 @@ console.log('cart data', shoppingCart)
                         </div>
                     ))
                     }
-                    {shoppingCart.length > 0 && <div className='cart-summary'>
+                    {shoppingCart.length > 0 && <div className='cart-summary' >
                         <div className='cart-summary-heading'>
                             Cart-Summary
                         </div>
@@ -82,7 +92,7 @@ console.log('cart data', shoppingCart)
                             <span>{totalQty}</span>
                         </div>
                         <Link to='cashout' className='cashout-link'>
-                            <button className='btn btn-success btn-md' style={{ marginTop: 5 + 'px' }}>
+                            <button type="submit" className='btn btn-success btn-md' style={{ marginTop: 5 + 'px' }}>
                                 Cash on delivery
                             </button>
                         </Link>
